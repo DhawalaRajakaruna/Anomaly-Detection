@@ -2,12 +2,12 @@
 research purposes. Don't try this code if you are a software engineer.'''
 
 # device settings
-device = 'cuda'  # or 'cpu'
+device = 'cpu' #'cpu'  # or 'cuda'
 
 # data settings
 dataset_path = "data/images"  # parent directory of datasets
-class_name = "dummy_data"  # dataset subdirectory
-modelname = "dummy_test"  # export evaluations/logs with this name
+class_name = "bottle"  # dataset subdirectory
+modelname = "bottle_test"  # export evaluations/logs with this name
 pre_extracted = True  # were feature preextracted with extract_features?
 
 img_size = (768, 768)  # image size of highest scale, others are //2, //4
@@ -32,13 +32,13 @@ n_feat = {"effnetB5": 304}[extractor]  # dependend from feature extractor
 map_size = (img_size[0] // 32, img_size[1] // 32)
 
 # dataloader parameters
-batch_size = 16 
+batch_size = 64 
 kernel_sizes = [3] * (n_coupling_blocks - 1) + [5]
 
 # total epochs = meta_epochs * sub_epochs
 # evaluation after <sub_epochs> epochs
-meta_epochs = 4  # total epochs = meta_epochs * sub_epochs
-sub_epochs = 60  # evaluate after this number of epochs
+meta_epochs = 1  # total epochs = meta_epochs * sub_epochs 4
+sub_epochs = 10  # evaluate after this number of epochs 60
 
 # output settings
 verbose = True

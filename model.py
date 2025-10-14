@@ -8,7 +8,7 @@ import config as c
 from freia_funcs import *
 
 WEIGHT_DIR = './weights'
-MODEL_DIR = './models/tmp'
+MODEL_DIR = './models/tmp/'
 
 
 def get_cs_flow_model(input_dim=c.n_feat):
@@ -72,6 +72,21 @@ def save_model(model, filename):
 
 
 def load_model(filename):
-    path = os.path.join(MODEL_DIR, filename)
-    model = torch.load(path)
+    import torch.serialization
+    from freia_funcs import ReversibleGraphNet
+    from model import CrossConvolutions, parallel_glow_coupling_layer
+
+    path = f"{MODEL_DIR}{filename}"
+    print("hello", path)
+
+    # Allow custom classes
+    with torch.serialization.safe_globals([
+        ReversibleGraphNet,
+        CrossConvolutions,
+        parallel_glow_coupling_layer
+    ]):
+        model = torch.load(path, map_location='cpu', weights_only=False)
+
+    print("✅ Model loaded successfully!")
     return model
+

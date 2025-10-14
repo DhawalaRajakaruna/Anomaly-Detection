@@ -12,12 +12,13 @@ def train(train_loader, test_loader):
     optimizer = torch.optim.Adam(model.parameters(), lr=c.lr_init, eps=1e-04, weight_decay=1e-5)
     model.to(c.device)
     if not c.pre_extracted:
+        print("Extracting features...")
         fe = FeatureExtractor()
         fe.eval()
         fe.to(c.device)
         for param in fe.parameters():
             param.requires_grad = False
-
+    print('Extractor skipped')
     z_obs = Score_Observer('AUROC')
 
     for epoch in range(c.meta_epochs):
@@ -58,6 +59,7 @@ def train(train_loader, test_loader):
         with torch.no_grad():
             for i, data in enumerate(tqdm(test_loader, disable=c.hide_tqdm_bar)):
                 inputs, labels = preprocess_batch(data)
+                print('note..')
                 if not c.pre_extracted:
                     inputs = fe(inputs)
 
