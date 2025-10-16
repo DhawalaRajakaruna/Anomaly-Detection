@@ -1,3 +1,7 @@
+# Test Results by me 
+![Test Results](https://github.com/DhawalaRajakaruna/Anomaly-Detection/blob/main/viz/maps/bottle_test/0.jpg)
+
+
 # CS-Flow
 
 This is the code to the WACV 2022 paper "[Fully Convolutional Cross-Scale-Flows for Image-based Defect Detection](
