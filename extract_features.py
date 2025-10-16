@@ -7,6 +7,8 @@ from utils import *
 import os
 
 
+
+
 def extract(train_loader, test_loader, class_name):
     model = FeatureExtractor()
     model.to(c.device)
@@ -15,7 +17,10 @@ def extract(train_loader, test_loader, class_name):
         for name, loader in zip(['train', 'test'], [train_loader, test_loader]):
             features = [list() for _ in range(c.n_scales)]
             labels = list()
+
+
             for i, data in enumerate(tqdm(loader)):
+
                 inputs, l = preprocess_batch(data)
                 labels.append(t2np(l))
                 z = model(inputs)
