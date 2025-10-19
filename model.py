@@ -87,6 +87,6 @@ def load_model(filename):
     ]):
         model = torch.load(path, map_location='cpu', weights_only=False)
 
-    print("✅ Model loaded successfully!")
+    print("Model loaded successfully!")
     return model
 
